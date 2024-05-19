@@ -2,6 +2,8 @@ package com.james.ecommercestore.controller;
 
 import com.james.ecommercestore.model.Product;
 import com.james.ecommercestore.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import java.util.Optional;
 @RequestMapping("/api/products")
 public class ProductController {
 
+    @Autowired
     private ProductService productService;
 
     @GetMapping
@@ -27,8 +30,9 @@ public class ProductController {
 
     //add product
     @PostMapping
-    public Product createProduct(Product product){
-        return productService.save(product);
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        Product createdProduct = productService.save(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
 
@@ -43,7 +47,7 @@ public class ProductController {
             existingProduct.setCost(productDetails.getCost());
             existingProduct.setQuantity(productDetails.getQuantity());
             existingProduct.setImageUrl(productDetails.getImageUrl());
-//            existingProduct.setCategory(productDetails.getCategory());
+            existingProduct.setCategory(productDetails.getCategory());
         } else {
             return ResponseEntity.notFound().build();
         }

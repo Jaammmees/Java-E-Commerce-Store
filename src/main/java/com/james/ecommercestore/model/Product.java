@@ -1,5 +1,6 @@
 package com.james.ecommercestore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -25,9 +26,10 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonBackReference
+    private Category category;
 
     // Getters and setters
     public Long getId() {
@@ -77,12 +79,12 @@ public class Product {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-//
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
