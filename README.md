@@ -34,3 +34,4 @@ This project is a personal endeavor, developed for fun and learning purposes. Th
     - Set up and develop a basic React frontend to interact with the backend.
 6. **Performance Optimization and Scaling**
     - Optimize application performance and prepare for scaling.
+
